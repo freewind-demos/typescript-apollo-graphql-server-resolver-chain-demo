@@ -1,21 +1,10 @@
 import {ApolloServer} from 'apollo-server';
-import filterBooks from './data';
+import resolvers from './resolvers';
 import typeDefs from './typeDefs';
-
-type Context = {
-  keyword?: string
-}
 
 const server = new ApolloServer({
   typeDefs,
-  context: ({req}): Context => ({
-    keyword: req.query['keyword'] as string
-  }),
-  resolvers: {
-    Query: {
-      books: (parent, args, context: Context, info) => filterBooks(context.keyword),
-    },
-  }
+  resolvers: resolvers
 });
 
 server.listen().then(({url}) => {

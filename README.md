@@ -1,21 +1,25 @@
-TypeScript Apollo GraphQL Server Context Demo
+TypeScript Apollo GraphQL Server Resolver Chain Demo
 ===========================
 
-可以定义一个context对象在不同的resolver之间共享信息，或者获取请求相关的数据供resolver使用。
+嵌套的Resolver从上到下计算数据时，下面的resolver可以通过`parent`拿到上一个resolver生成的父节点数据
 
 ```
 npm install
 npm run demo
 ```
 
-在打开的playground中的地址处填上：http://localhost:4000/?keyword=Park
-
-左边的请求填写：
+在打开的playground中左边填写：
 
 ```
-{
-  books {
-    title
+query {
+  libraries {
+    books {
+      title
+      author {
+        name
+      }
+    }
   }
 }
 ```
+
